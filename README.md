@@ -22,6 +22,13 @@ DATABASE_URL=<MONGO_DB_API_KEY>
 PORT=3003
 ```
 
+
+Install Nodemon globally using the following command:
+
+```bash
+npm install -g nodemon
+```
+
 To launch the server in Dev mode with hot reloads, run the following command: 
 
 ```bash
