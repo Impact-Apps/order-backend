@@ -1,4 +1,4 @@
-import UserModel from '../models/User';
+const UserModel =  require('../models/User');
 
 const signUp = async (user) => {
     let err, userRecord
@@ -11,7 +11,7 @@ const login = async (email, password) => {
     return userRecord
 }
 
-export default {
+module.exports = {
     signUp,
     login
 }
