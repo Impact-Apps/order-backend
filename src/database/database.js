@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 
 const dbRoute = process.env.DATABASE_URL;
-console.log(dbRoute + " - this is db url")
 
 // connects our back end code with the database
 module.exports.connect = async () => {
