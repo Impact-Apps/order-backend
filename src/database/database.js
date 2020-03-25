@@ -19,6 +19,4 @@ module.exports.connect = async () => {
     db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 }
 
-module.exports.getConnection = async () => {
-    return mongoose;
-}
+module.exports.getConnection = async () => mongoose
