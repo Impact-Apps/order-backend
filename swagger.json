@@ -1,0 +1,143 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Swagger Docs",
+    "description": "Docs for app backend",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "localhost:3003",
+  "basePath": "/api",
+  "tags": [
+    {
+      "name": "Restaurants",
+      "description": "API for restaurants in the system"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/restaurants": {
+      "post": {
+        "tags": [
+          "Restaurants"
+        ],
+        "description": "Create new restaurant in system",
+        "parameters": [
+          {
+            "name": "restaurant",
+            "in": "body",
+            "description": "Restaurant that we want to create",
+            "schema": {
+              "$ref": "#/definitions/Restaurant"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "New restaurant is created",
+            "schema": {
+              "$ref": "#/definitions/Restaurant"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Restaurants"
+        ],
+        "summary": "Get all restaurant in system",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Restaurants"
+            }
+          }
+        }
+      }
+    },
+    "/restaurants/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "ID of user that we want to find",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Restaurants"
+        ],
+        "summary": "Get restaurant with given ID",
+        "responses": {
+          "200": {
+            "description": "Restaurant is found",
+            "schema": {
+              "$ref": "#/definitions/Restaurant"
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete user with given ID",
+        "tags": [
+          "Restaurants"
+        ],
+        "responses": {
+          "200": {
+            "description": "Restaurant is deleted"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Restaurant": {
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+
+        "cuisine": {
+          "type": "string"
+        },
+
+        "isVegetarian": {
+          "type": "boolean"
+        },
+        "image": {
+          "type": "string"
+        },
+        "rating": {
+          "type": "number"
+        },
+        "location": {
+          "type": "string"
+        }
+      }
+    },
+    "Restaurants": {
+      "type": "array",
+      "$ref": "#/definitions/Restaurant"
+    }
+  }
+}
