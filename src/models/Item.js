@@ -8,18 +8,27 @@ const Item = new Schema(
             required: [true, 'Please enter an item name'],
             index: true,
         },
-        isVegetarian: {
-            type: Boolean,
-            default: false,
-        },
-        foodType: {
-            type: String,
-            required: true,
-        },
         price: {
-            type: Number,
+            type: String,
             required: [true, 'Please enter a price for the item'],
         },
+        cuisine: {
+            type: String,
+            lowercase: true,
+        },
+        isVegetarian: {
+            type: Boolean,
+        },
+        image: {
+            type: String,
+            lowercase: true,
+        },
+        rating: {
+            type: Number,
+        },
+        label: {
+            type: String
+        }
     },
     { timestamps: true },
 );

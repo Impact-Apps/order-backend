@@ -27,7 +27,7 @@
     "application/json"
   ],
   "paths": {
-    "/restaurants": {
+    "/restaurant": {
       "post": {
         "tags": [
           "Restaurants"
@@ -70,7 +70,7 @@
         }
       }
     },
-    "/restaurants/{id}": {
+    "/restaurant/{id}": {
       "parameters": [
         {
           "name": "id",
@@ -102,6 +102,164 @@
         "responses": {
           "200": {
             "description": "Restaurant is deleted"
+          }
+        }
+      }
+    },
+    "/menu": {
+      "post": {
+        "tags": [
+          "Menus"
+        ],
+        "description": "Create new menu in system",
+        "parameters": [
+          {
+            "name": "menu",
+            "in": "body",
+            "description": "Menu that we want to create",
+            "schema": {
+              "$ref": "#/definitions/Menu"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "New menu is created",
+            "schema": {
+              "$ref": "#/definitions/Menu"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Menus"
+        ],
+        "summary": "Get all menus in system",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Menus"
+            }
+          }
+        }
+      }
+    },
+    "/menu/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "ID of menu that we want to find",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Menus"
+        ],
+        "summary": "Get menu with given ID",
+        "responses": {
+          "200": {
+            "description": "Menu is found",
+            "schema": {
+              "$ref": "#/definitions/Menu"
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete menu with given ID",
+        "tags": [
+          "Menus"
+        ],
+        "responses": {
+          "200": {
+            "description": "Menu is deleted"
+          }
+        }
+      }
+    },
+    "/item": {
+      "post": {
+        "tags": [
+          "Items"
+        ],
+        "description": "Create new item in system",
+        "parameters": [
+          {
+            "name": "item",
+            "in": "body",
+            "description": "Item that we want to create",
+            "schema": {
+              "$ref": "#/definitions/Item"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "New item is created",
+            "schema": {
+              "$ref": "#/definitions/Item"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Items"
+        ],
+        "summary": "Get all items in system",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Items"
+            }
+          }
+        }
+      }
+    },
+    "/item/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "ID of item that we want to find",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Items"
+        ],
+        "summary": "Get item with given ID",
+        "responses": {
+          "200": {
+            "description": "Item is found",
+            "schema": {
+              "$ref": "#/definitions/Item"
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete item with given ID",
+        "tags": [
+          "Items"
+        ],
+        "responses": {
+          "200": {
+            "description": "Item is deleted"
           }
         }
       }
@@ -138,6 +296,55 @@
     "Restaurants": {
       "type": "array",
       "$ref": "#/definitions/Restaurant"
+    },
+    "Item": {
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "cuisine": {
+          "type": "string"
+        },
+        "isVegetarian": {
+          "type": "boolean"
+        },
+        "image": {
+          "type": "string"
+        },
+        "price": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "rating": {
+          "type": "number"
+        }
+      }
+    },
+    "Items": {
+      "type": "array",
+      "$ref": "#/definitions/Item"
+    },
+    "Menu": {
+      "properties": {
+        "restaurantId": {
+          "type": "string"
+        },
+        "itemIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Menus": {
+      "type": "array",
+      "$ref": "#/definitions/Menu"
     }
   }
 }

@@ -8,31 +8,25 @@ const Restaurant = new Schema(
             required: [true, 'Please enter a full name'],
             index: true,
         },
-
         cuisine: {
             type: String,
             lowercase: true,
-            index: true,
         },
-
         isVegetarian: {
             type: Boolean,
-            index: true,
         },
         image: {
             type: String,
             lowercase: true,
-            index: true,
         },
         rating: {
             type: Number,
-            index: true,
         },
         location: {
             type: String,
             lowercase: true,
-            index: true,
-        }
+        },
+        menuId: {type: mongoose.Schema.Types.ObjectId}
     },
     { timestamps: true },
 );
