@@ -9,12 +9,12 @@ const deleteItem = async id => ItemModel.findByIdAndRemove(id)
 
 const getAll =  async () => await ItemModel.find()
 
-const getAllItemsInMenu = async menuId => await ItemModel.find({menuId})
+const findItemsForMenu = async (itemIds) => await ItemModel.find({ '_id': {$in: itemIds} })
 
 module.exports = {
     create,
     get,
     getAll,
     deleteItem,
-    getAllItemsInMenu,
+    findItemsForMenu,
 }

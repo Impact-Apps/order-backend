@@ -2,6 +2,8 @@ const mongoose = require('mongoose');
 
 const dbRoute = process.env.DATABASE_URL;
 
+const { mongoUrl } = require('../../dbConstants');
+
 // connects our back end code with the database
 module.exports.connect = async () => {
 
@@ -20,3 +22,16 @@ module.exports.connect = async () => {
 }
 
 module.exports.getConnection = async () => mongoose
+
+module.exports.dropAllCollections = async () => {
+
+  const mongooseOpts = {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    poolSize: 10,
+    useFindAndModify: false
+  };
+
+  await mongoose.connect(mongoUrl, mongooseOpts);
+  mongoose.connection.db.dropDatabase();
+} 

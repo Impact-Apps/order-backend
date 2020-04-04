@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const menuService = require('../services/menuService')
+const itemService = require('../services/itemService')
 const to = require('await-to-js').default
 
 router.post("/", async (req, res, next) => {
@@ -28,6 +29,13 @@ router.delete("/:id", async (req, res, next) => {
     return res.send(deleteResponse)
 })
 
+router.get('/:restaurantId/items', async (req, res, next) => {
+    const [err, menu] = await to(menuService.getByRestaurantId(req.params.restaurantId))
+    if(err) return next(err);
+    const [itemsErr, items] = await to(itemService.findItemsForMenu(menu.itemIds)) 
+    if(itemsErr) return next(itemsErr)
+    return res.send(items)
+})
 
 
 module.exports = router

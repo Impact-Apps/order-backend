@@ -5,6 +5,8 @@ const create = async menu => await MenuModel.create(menu);
 
 const get = async id => await MenuModel.findById(id)
 
+const getByRestaurantId = async restaurantId => await MenuModel.findOne({ restaurantId })
+
 const deleteMenu = async id => MenuModel.findByIdAndRemove(id)
 
 const getAll =  async () => await MenuModel.find()
@@ -15,4 +17,5 @@ module.exports = {
     get,
     getAll,
     deleteMenu,
+    getByRestaurantId
 }

@@ -25,8 +25,7 @@ const Restaurant = new Schema(
         location: {
             type: String,
             lowercase: true,
-        },
-        menuId: {type: mongoose.Schema.Types.ObjectId}
+        }
     },
     { timestamps: true },
 );
