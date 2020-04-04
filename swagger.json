@@ -315,7 +315,7 @@
           "type": "string"
         },
         "price": {
-          "type": "string"
+          "type": "number"
         },
         "label": {
           "type": "string"

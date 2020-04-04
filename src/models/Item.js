@@ -9,7 +9,7 @@ const Item = new Schema(
             index: true,
         },
         price: {
-            type: String,
+            type: Number,
             required: [true, 'Please enter a price for the item'],
         },
         cuisine: {

@@ -30,7 +30,7 @@ sampleData = async () => {
     const menusToAdd = [
             {restaurantId: insertedRestaurantsIdsArr[0], itemIds: insertedItemsIdsArr.slice(0,5)},
             {restaurantId: insertedRestaurantsIdsArr[1], itemIds: insertedItemsIdsArr.slice(5,10)},
-            {restaurantId: insertedRestaurantsIdsArr[0], itemIds: insertedItemsIdsArr.slice(10,15)}
+            {restaurantId: insertedRestaurantsIdsArr[2], itemIds: insertedItemsIdsArr.slice(10,15)}
         ]
 
     const insertedMenus = await MenuModel.collection.insert(menusToAdd)
