@@ -20,6 +20,7 @@ app.use("/api", router)
 
 router.use("/auth", require('./controllers/authController.js'))
 router.use("/restaurant", require('./controllers/restaurantController.js'))
+router.use("/order", require('./controllers/orderController.js'))
 router.use("/item", require('./controllers/itemController.js'))
 router.use("/menu", require('./controllers/menuController.js'))
 
