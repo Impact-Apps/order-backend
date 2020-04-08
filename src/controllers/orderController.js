@@ -10,10 +10,20 @@ router.post("/", async (req, res, next) => {
     return res.json(order)
 })
 
+
 router.get("/", async (req, res, next) => {
-    const [err, orders] = await to(orderService.getAll())
-    if(err) return next(err)
-    return res.json(orders)
+    const restaurantId = req.query.restaurantId
+    if(!!restaurantId){
+        const [err, orders] = await to(orderService.getByRestaurantId(restaurantId))
+        if(err) return next(err)
+        return res.json(orders)
+    }
+    else{
+        const [err, orders] = await to(orderService.getAll())
+        if(err) return next(err)
+        return res.json(orders)
+    }
+
 })
 
 router.get("/:id", async (req, res, next) => {
