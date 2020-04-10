@@ -15,12 +15,16 @@ const Order = new Schema(
         price: {
             type: Number,
         },
-        payementId: {
+        paymentId: {
             type: mongoose.Schema.Types.ObjectId, 
             default: null,
         },
         total: {
             type: String,
+        },
+        status: {
+            type: String,
+            enum: ['pending', 'active', 'done'],
         }
     },
     { timestamps: true },
