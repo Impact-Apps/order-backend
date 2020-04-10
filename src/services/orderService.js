@@ -7,7 +7,10 @@ const get = async id => await OrderModel.findById(id)
 
 const deleteOrder = async id => OrderModel.findByIdAndRemove(id)
 
-const getAll =  async () => await OrderModel.find()
+const updateOrder = async (id, update) => OrderModel.updateOne({_id: id}, update);
+
+const getAll = async filter => await OrderModel.find(filter)
+
 const getByRestaurantId = async  restaurantId => await OrderModel.find({'restaurantId': restaurantId})
 
 
@@ -16,5 +19,6 @@ module.exports = {
     get,
     getAll,
     deleteOrder,
-    getByRestaurantId
+    getByRestaurantId,
+    updateOrder,
 }

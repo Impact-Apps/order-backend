@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const orderService = require('../services/orderService')
 const to = require('await-to-js').default
+const { isEmpty } = require('lodash')
 
 router.post("/", async (req, res, next) => {
     const body = req.body
@@ -12,18 +13,21 @@ router.post("/", async (req, res, next) => {
 
 
 router.get("/", async (req, res, next) => {
-    const restaurantId = req.query.restaurantId
-    if(!!restaurantId){
-        const [err, orders] = await to(orderService.getByRestaurantId(restaurantId))
-        if(err) return next(err)
-        return res.json(orders)
-    }
-    else{
-        const [err, orders] = await to(orderService.getAll())
-        if(err) return next(err)
-        return res.json(orders)
-    }
+    const { filter }  = req.query || {};
+    const parsedFilter = isEmpty(filter) ? {} : JSON.parse(filter);
+    const [err, orders] = await to(orderService.getAll({...parsedFilter}))
+    if(err) return next(err) 
+    return res.json(orders)
 
+})
+
+router.patch('/:id', async (req, res, next) => {
+    const { id } = req.params
+    const update = req.body
+    const [err, updatedOrder] = await to(orderService.updateOrder(id, update))
+    if(err) return next(err)
+    console.log(updatedOrder)
+    return res.json(updatedOrder)
 })
 
 router.get("/:id", async (req, res, next) => {
