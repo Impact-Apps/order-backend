@@ -8,6 +8,7 @@ router.post("/", async (req, res, next) => {
     const body = req.body
     const [err, order] = await to(orderService.create(body))
     if(err) return next(err)
+    req.app.get('eventEmitter').emit('newOrderReceived', order.restaurantId)
     return res.json(order)
 })
 
@@ -26,7 +27,6 @@ router.patch('/:id', async (req, res, next) => {
     const update = req.body
     const [err, updatedOrder] = await to(orderService.updateOrder(id, update))
     if(err) return next(err)
-    console.log(updatedOrder)
     return res.json(updatedOrder)
 })
 
