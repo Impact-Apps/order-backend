@@ -18,6 +18,8 @@ app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use("/api", router)
 
+router.use('/events', require('./notification'))
+
 router.use("/auth", require('./controllers/authController.js'))
 router.use("/restaurant", require('./controllers/restaurantController.js'))
 router.use("/order", require('./controllers/orderController.js'))
