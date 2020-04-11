@@ -27,6 +27,7 @@ router.patch('/:id', async (req, res, next) => {
     const update = req.body
     const [err, updatedOrder] = await to(orderService.updateOrder(id, update))
     if(err) return next(err)
+    req.app.get('eventEmitter').emit('orderUpdated', updatedOrder.userId)
     return res.json(updatedOrder)
 })
 

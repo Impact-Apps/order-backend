@@ -5,9 +5,9 @@ const create = async order => await OrderModel.create(order);
 
 const get = async id => await OrderModel.findById(id)
 
-const deleteOrder = async id => OrderModel.findByIdAndRemove(id)
+const deleteOrder = async id => await OrderModel.findByIdAndRemove(id)
 
-const updateOrder = async (id, update) => OrderModel.updateOne({_id: id}, update);
+const updateOrder = async (id, update) => await OrderModel.findByIdAndUpdate(id, update);
 
 const getAll = async filter => await OrderModel.find(filter)
 

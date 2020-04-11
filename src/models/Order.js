@@ -7,8 +7,8 @@ const Order = new Schema(
             type: mongoose.Schema.Types.ObjectId, 
             required:true,
         },
-        useriId: {
-            type: mongoose.Schema.Types.ObjectId, 
+        userId: {
+            type: Number,
             default: null,
         },
         items: [{type: Object}],

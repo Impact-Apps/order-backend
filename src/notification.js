@@ -1,8 +1,8 @@
 const express = require('express')
 const router = express.Router()
 
-const newOrderForRestaurantEvent = (restaurantId, res) => {
-    res.write(`event: newOrderReceived-${restaurantId}\ndata: empty\n\n`);
+const emitEvent = (eventName, res) => {
+    res.write(`event: ${eventName}\ndata: empty\n\n`);
 }
 
 router.get("/", (req, res) => {
@@ -12,7 +12,11 @@ router.get("/", (req, res) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.flushHeaders(); // flush the headers to establish SSE with client
     req.app.get('eventEmitter').on('newOrderReceived', (restaurantId) => {
-        newOrderForRestaurantEvent(restaurantId, res)
+        emitEvent(`newOrderReceived-${restaurantId}`, res)
+    })
+
+    req.app.get('eventEmitter').on('orderUpdated', (userId) => {
+        emitEvent(`orderUpdated-${userId}`, res)
     })
 
     res.on('close', () => {
