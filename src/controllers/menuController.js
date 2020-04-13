@@ -30,6 +30,7 @@ router.delete("/:id", async (req, res, next) => {
 })
 
 router.get('/:restaurantId/items', async (req, res, next) => {
+    console.log(req.user.sub)
     const [err, menu] = await to(menuService.getByRestaurantId(req.params.restaurantId))
     if(err) return next(err);
     const [itemsErr, items] = await to(itemService.findItemsForMenu(menu.itemIds)) 
