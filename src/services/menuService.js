@@ -11,11 +11,16 @@ const deleteMenu = async id => MenuModel.findByIdAndRemove(id)
 
 const getAll =  async () => await MenuModel.find()
 
+const updateMenuWithNewItems = async (items, restaurantId) => {
+    
+    await MenuModel.findOneAndUpdate({ restaurantId }, { $push: { itemIds: { $each: [...items] } } })
+}
 
 module.exports = {
     create,
     get,
     getAll,
     deleteMenu,
-    getByRestaurantId
+    getByRestaurantId,
+    updateMenuWithNewItems,
 }
