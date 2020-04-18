@@ -3,6 +3,7 @@ const router = express.Router()
 const menuService = require('../services/menuService')
 const itemService = require('../services/itemService')
 const to = require('await-to-js').default
+const {isEmpty} = require('lodash')
 
 router.post("/", async (req, res, next) => {
     const body = req.body
@@ -10,6 +11,22 @@ router.post("/", async (req, res, next) => {
     if(err) return next(err)
     return res.json(item)
 })
+
+router.patch("/:restaurantId", async (req, res, next) => {
+    const body = req.body
+    // console.log(body)
+    const [updateErr, upsertedItems] = await to(itemService.upsertItems(body.items))
+    if(updateErr) return next(updateErr)
+    const itemIds = Object.values(upsertedItems)
+    console.log(itemIds)
+    if(!isEmpty(itemIds)) {
+        // New items were added, add their IDs to the menu
+        const [err] = await to(menuService.updateMenuWithNewItems(itemIds, body.restaurantId))
+        if(err) return next(err)
+    }
+    return res.sendStatus(200)
+})
+
 router.get("/", async (req, res, next) => {
     const [err, menus] = await to(menuService.getAll())
     if(err) return next(err)
