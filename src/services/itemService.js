@@ -23,20 +23,13 @@ const reduceUpdate = function(update) {
   };
 
 const upsertItems = async function(items) {
-    console.log(items)
     const mongoUpdateArray = _.map(items, item => {
       const { _id, ...updateSet} = item
-      
-
-      const reducedUpdate = reduceUpdate(updateSet);
-
-      console.log(reducedUpdate)
-  
+      const reducedUpdate = reduceUpdate(updateSet)
       return {
         updateOne: { filter: { _id: mongoose.Types.ObjectId(_id) }, update: { $set: reducedUpdate }, upsert: true },
       };
     });
-    console.log(mongoUpdateArray[0]);
     try {
       const { upsertedIds } = await ItemModel.collection.bulkWrite(mongoUpdateArray);
       return upsertedIds;
@@ -45,6 +38,10 @@ const upsertItems = async function(items) {
     }
 };
 
+const deleteMany = async (filter) => {
+    return await ItemModel.deleteMany(filter)
+}
+
 module.exports = {
     create,
     get,
@@ -52,4 +49,5 @@ module.exports = {
     deleteItem,
     findItemsForMenu,
     upsertItems,
+    deleteMany,
 }
