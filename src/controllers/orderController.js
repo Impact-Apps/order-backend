@@ -3,6 +3,7 @@ const router = express.Router()
 const orderService = require('../services/orderService')
 const to = require('await-to-js').default
 const { isEmpty } = require('lodash')
+const mongoose = require('mongoose');
 
 router.post("/", async (req, res, next) => {
     const body = req.body
@@ -19,6 +20,39 @@ router.get("/", async (req, res, next) => {
     const [err, orders] = await to(orderService.getAll({...parsedFilter}))
     if(err) return next(err) 
     return res.json(orders)
+
+})
+
+router.get("/restaurant/:restaurantId/aggregated", async (req, res, next) => {
+    const { restaurantId } = req.params
+    const filter = {
+        restaurantId: mongoose.Types.ObjectId(restaurantId)
+    }
+    const [err, aggregatedOrders] = await to(orderService.getAllAggregated(filter))
+    if(err) return next(err) 
+    return res.json(aggregatedOrders)
+
+})
+
+router.get("/restaurant/:restaurantId/aggregated/user", async (req, res, next) => {
+    const { restaurantId } = req.params
+    const filter = {
+        restaurantId: mongoose.Types.ObjectId(restaurantId)
+    }
+    const [err, aggregatedOrders] = await to(orderService.getAllAggregatedByUser(filter))
+    if(err) return next(err) 
+    return res.json(aggregatedOrders)
+
+})
+
+router.get("/restaurant/:restaurantId/aggregated/item", async (req, res, next) => {
+    const { restaurantId } = req.params
+    const filter = {
+        restaurantId: mongoose.Types.ObjectId(restaurantId)
+    }
+    const [err, aggregatedOrders] = await to(orderService.getAllAggregatedByItems(filter))
+    if(err) return next(err) 
+    return res.json(aggregatedOrders)
 
 })
 
