@@ -25,7 +25,11 @@ const Restaurant = new Schema(
         location: {
             type: String,
             lowercase: true,
-        }
+        },
+        reviews: [{
+            type: Schema.Types.ObjectId,
+            ref: 'RestaurantReview'
+        }]
     },
     { timestamps: true },
 );
