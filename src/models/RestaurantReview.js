@@ -18,12 +18,10 @@ const RestaurantReview = new Schema(
         },
         reviewer: {
           type: mongoose.Schema.ObjectId,
-          ref: 'User',
           required: [true, 'Review must have an reviewer']
         },
-        restaurant: {
+        restaurantId: {
           type: mongoose.Schema.ObjectId,
-          ref: 'Restaurant',
           required: [true, 'Review must be associated to a restaurant']
         }
   }

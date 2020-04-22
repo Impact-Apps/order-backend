@@ -18,12 +18,10 @@ const ItemReview = new Schema(
         },
         reviewer: {
             type: mongoose.Schema.ObjectId,
-            ref: 'User',
             required: [true, 'Review must have an reviewer']
         },
-        item: {
+        itemId: {
             type: mongoose.Schema.ObjectId,
-            ref: 'Item',
             required: [true, 'Review must be associated to an Item']
         }
     }
