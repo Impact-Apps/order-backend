@@ -3,6 +3,12 @@ const router = express.Router()
 const restaurantService = require('../services/restaurantService')
 const to = require('await-to-js').default
 
+/**
+ * @swagger
+ * api/restaurant/:
+ *    get:
+ *      description: This should return all restaurants
+ */
 router.post("/", async (req, res, next) => {
     const body = req.body
     const [err, restaurant] = await to(restaurantService.create(body))
