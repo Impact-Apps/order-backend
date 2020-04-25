@@ -1,7 +1,6 @@
 require('dotenv').config()
 const swaggerUi = require('swagger-ui-express'),
-    swaggerDocument = require('../swagger.json');
-
+    swaggerDocument = require('../swaggerDoc');
 
 const cors = require('cors');
 const express = require('express')
