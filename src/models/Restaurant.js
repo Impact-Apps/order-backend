@@ -5,8 +5,14 @@ const Restaurant = new Schema(
     {
         name: {
             type: String,
-            required: [true, 'Please enter a full name'],
             index: true,
+        },
+        auth0Id: {
+            type: String,
+            index: true,
+        },
+        email: {
+            type: String,
         },
         cuisine: {
             type: String,
