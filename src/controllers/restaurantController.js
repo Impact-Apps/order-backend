@@ -15,10 +15,14 @@ router.get("/", async (req, res, next) => {
     return res.json(restaurants)
 })
 
-router.get("/:id", async (req, res, next) => {
-    const [err, restaurant] = await to(restaurantService.get(req.params.id))
+router.get("/:auth0Id", async (req, res, next) => {
+    const { auth0Id } = req.params || {}
+    const filter = {
+        auth0Id
+    }
+    const [err, restaurant] = await to(restaurantService.get(filter))
     if(err) return next(err)
-    return res.json(restaurant)
+    return res.json(restaurant[0])
 
 })
 
