@@ -60,6 +60,7 @@ router.use("/menu", require('./controllers/menuController.js'))
 router.use("/restaurant", require('./controllers/restaurantReviewController.js'))
 router.use("/item", require('./controllers/ItemReviewController.js'))
 router.use("/user", require('./controllers/userController.js'))
+router.use("/payment", require('./controllers/paymentController.js'))
 
 
 
