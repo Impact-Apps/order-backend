@@ -2,3 +2,4 @@
 node_modules
 dbConstants.js
 .env
+dbConstants

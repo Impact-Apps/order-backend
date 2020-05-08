@@ -28,7 +28,11 @@ const Item = new Schema(
         },
         label: {
             type: String
-        }
+        },
+        reviews: [{
+            type: Schema.Types.ObjectId,
+            ref: 'ItemReview'
+        }]
     },
     { timestamps: true },
 );

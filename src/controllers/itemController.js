@@ -29,6 +29,14 @@ router.delete("/:id", async (req, res, next) => {
     return res.send(deleteResponse)
 })
 
+router.delete("/", async (req, res, next) => {
+    const { deletions } = req.query
+    const filter = {_id: {$in: deletions}}
+    const [err, deleteResponse] = await to(itemService.deleteMany(filter))
+    if(err) return next(err)
+    return res.send(deleteResponse)
+})
+
 
 
 module.exports = router
