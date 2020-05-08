@@ -5,22 +5,16 @@ const User = new Schema(
     {
         name: {
             type: String,
-            required: [true, 'Please enter a full name'],
+        },
+        auth0Id: {
+            type: String,
             index: true,
         },
-
         email: {
             type: String,
             lowercase: true,
             unique: true,
             index: true,
-        },
-
-        password: String,
-
-        role: {
-            type: String,
-            default: 'customer',
         },
     },
     { timestamps: true },
