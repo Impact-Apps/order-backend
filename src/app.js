@@ -52,7 +52,6 @@ app.use("/api", router)
 
 router.use('/events', require('./notification'))
 
-router.use("/auth", require('./controllers/authController.js'))
 router.use("/restaurant", require('./controllers/restaurantController.js'))
 router.use("/order", require('./controllers/orderController.js'))
 router.use("/item", require('./controllers/itemController.js'))
