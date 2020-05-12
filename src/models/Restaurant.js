@@ -32,6 +32,9 @@ const Restaurant = new Schema(
             type: String,
             lowercase: true,
         },
+        stripeAccountId: {
+            type: String
+        },
         reviews: [{
             type: Schema.Types.ObjectId,
             ref: 'RestaurantReview'

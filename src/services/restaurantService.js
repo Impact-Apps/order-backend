@@ -9,9 +9,25 @@ const deleteRestaurant = async id => RestaurantModel.findByIdAndRemove(id)
 
 const getAll =  async () => await RestaurantModel.find()
 
+const updateRestaurant = async (id, update) => await RestaurantModel.findByIdAndUpdate(id, update);
+
+const getOrCreate = async auth0Id => await RestaurantModel.collection.findOneAndUpdate(
+    { auth0Id },
+    {
+        $setOnInsert: { auth0Id },
+    },
+    {
+        returnOriginal: false,
+        upsert: true,
+        returnNewDocument: true,
+    }
+);
+
 module.exports = {
     create,
     get,
     getAll,
-    deleteRestaurant
+    deleteRestaurant,
+    getOrCreate,
+    updateRestaurant,
 }

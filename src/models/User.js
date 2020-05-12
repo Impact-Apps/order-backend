@@ -15,6 +15,9 @@ const User = new Schema(
             lowercase: true,
             index: true,
         },
+        stripeCustomerId: {
+            type: String,
+        }
     },
     { timestamps: true },
 );

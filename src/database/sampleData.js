@@ -23,7 +23,8 @@ sampleData = async () => {
     const insertedItemsIdsArr = Object.values(insertedItems.insertedIds)
     console.log(insertedItemsIdsArr)
 
-
+    restaurantsToAdd[0].auth0Id = 'auth0|5eb59834b8ae290bf15131a9'
+    restaurantsToAdd[0].stripeAccountId = 'acct_1Gga61LK3s7xe9vD'
     const insertedRestaurants = await RestaurantModel.collection.insert(restaurantsToAdd.slice(0,3))
 
     const insertedRestaurantsIdsArr = Object.values(insertedRestaurants.insertedIds)

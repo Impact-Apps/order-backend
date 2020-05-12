@@ -2,6 +2,8 @@ const express = require('express')
 const router = express.Router()
 const restaurantService = require('../services/restaurantService')
 const to = require('await-to-js').default
+const stripe = require('stripe')('sk_test_3cJsDJW6yKPIWO1tMolUXH0I00S2qw90bw'); // Secret key
+const { get } = require('lodash')
 
 router.post("/", async (req, res, next) => {
     const body = req.body
@@ -17,12 +19,22 @@ router.get("/", async (req, res, next) => {
 
 router.get("/:auth0Id", async (req, res, next) => {
     const { auth0Id } = req.params || {}
-    const filter = {
-        auth0Id
-    }
-    const [err, restaurant] = await to(restaurantService.get(filter))
+    const { email } = req.query || {}
+    console.log(email, auth0Id)
+    const [err, restaurant] = await to(restaurantService.getOrCreate(auth0Id))
     if(err) return next(err)
-    return res.json(restaurant[0])
+    if(get(restaurant, ['lastErrorObject', 'updatedExisting'])) return res.json(restaurant.value)
+    const stripeAccount = await stripe.accounts.create({
+        email,
+        country: "ie",
+        type: "custom",
+        requested_capabilities: [
+            'card_payments',
+            'transfers',
+        ],
+    })
+    await restaurantService.updateRestaurant(restaurant.value._id, { stripeAccountId: stripeAccount.id })
+    return res.json({...restaurant.value, stripeAccountId: stripeAccount.id})
 
 })
 
