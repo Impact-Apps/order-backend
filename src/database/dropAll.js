@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const { mongoUrl } = require('../../dbConstants');
+const OrderModel =  require('../models/Order');
 
 dropAllCollections = async () => {
 
@@ -14,6 +15,7 @@ dropAllCollections = async () => {
 
     await mongoose.connect(mongoUrl, mongooseOpts);
     await mongoose.connection.db.dropDatabase();
+    // await OrderModel.collection.drop()
     process.exit(0)
 }
 dropAllCollections()

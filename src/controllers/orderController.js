@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const orderService = require('../services/orderService')
 const to = require('await-to-js').default
-const { isEmpty } = require('lodash')
+const { isEmpty, has } = require('lodash')
 const mongoose = require('mongoose');
 
 router.post("/", async (req, res, next) => {
@@ -17,10 +17,12 @@ router.post("/", async (req, res, next) => {
 router.get("/", async (req, res, next) => {
     const { filter }  = req.query || {};
     const parsedFilter = isEmpty(filter) ? {} : JSON.parse(filter);
+    console.log(parsedFilter)
+    if(has(parsedFilter, 'userId')) parsedFilter.userId = mongoose.Types.ObjectId(parsedFilter.userId)
+    if(has(parsedFilter, 'restaurantId')) parsedFilter.restaurantId = mongoose.Types.ObjectId(parsedFilter.restaurantId)
     const [err, orders] = await to(orderService.getAll({...parsedFilter}))
     if(err) return next(err) 
     return res.json(orders)
-
 })
 
 router.get("/restaurant/:restaurantId/aggregated", async (req, res, next) => {
@@ -61,6 +63,8 @@ router.patch('/:id', async (req, res, next) => {
     const update = req.body
     const [err, updatedOrder] = await to(orderService.updateOrder(id, update))
     if(err) return next(err)
+    // req.app.get('eventEmitter').emit('newOrderReceived', order.restaurantId)
+    console.log('hello emit')
     req.app.get('eventEmitter').emit('orderUpdated', updatedOrder.userId)
     return res.json(updatedOrder)
 })

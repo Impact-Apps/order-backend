@@ -8,7 +8,7 @@ const Order = new Schema(
             required:true,
         },
         userId: {
-            type: Number,
+            type: mongoose.Schema.Types.ObjectId,
             default: null,
         },
         items: [{type: Object}],

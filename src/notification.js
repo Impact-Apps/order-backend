@@ -6,7 +6,7 @@ const emitEvent = (eventName, res) => {
 }
 
 router.get("/", (req, res) => {
-
+    console.log('line 9')
     res.setHeader('Cache-Control', 'no-cache');
     res.setHeader('Content-Type', 'text/event-stream');
     res.setHeader("Access-Control-Allow-Origin", "*");

@@ -47,7 +47,6 @@ router.post('/doPayment', async (req, res) => {
         customer: stripeCustomer.id,
         source: stripeCustomer.default_source.id,
         description: 'Test payment',
-        payment_method_types: ['card'],
         application_fee_amount: 123,
         on_behalf_of: stripeAccountId,
         transfer_data: {
