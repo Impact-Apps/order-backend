@@ -12,7 +12,15 @@ router.post("/", async (req, res, next) => {
     return res.json(restaurant)
 })
 router.get("/", async (req, res, next) => {
-    const [err, restaurants] = await to(restaurantService.getAll())
+    let err, restaurants
+    const { longitude, latitude } = req.query
+    if (longitude && latitude) {
+        console.log(longitude, latitude);
+        [err, restaurants] = await to(restaurantService.getByLocation(longitude, latitude))
+    } else{
+        console.log("No longitude or latitude");
+        [err, restaurants] = await to(restaurantService.getAll())
+    }
     if(err) return next(err)
     return res.json(restaurants)
 })

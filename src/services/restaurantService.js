@@ -23,10 +23,23 @@ const getOrCreate = async auth0Id => await RestaurantModel.collection.findOneAnd
     }
 );
 
+const getByLocation =  async (longitude, latitude) => await RestaurantModel.find(
+  {
+      location:
+        { $near:
+              {
+                  $geometry: { type: "Point",  coordinates: [ longitude, latitude ] },
+              }
+        }
+  }
+)
+
 module.exports = {
     create,
     get,
     getAll,
+    deleteRestaurant,
+    getByLocation,
     deleteRestaurant,
     getOrCreate,
     updateRestaurant,
