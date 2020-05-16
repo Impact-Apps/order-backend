@@ -47,6 +47,29 @@ const findOrCreateStripeCustomer = async (user, tokenId, email) => {
     }
 }
 
+const getAccountSetUpLink = async (stripeAccountId) => {
+    const accountLinks = await stripe.accountLinks.create({
+        account: stripeAccountId,
+        failure_url: 'http://localhost:8080/',
+        success_url: 'http://localhost:8080/',
+        type: 'custom_account_verification',
+        collect: 'eventually_due',
+    });
+    return accountLinks
+}
+
+const addExternalAccount = async (stripeAccountId, token) => {
+    const accountUpdate = await stripe.accounts.createExternalAccount(
+        stripeAccountId,
+        {
+          external_account: token,
+        }
+    )
+    return accountUpdate
+}
+
 module.exports = {
     findOrCreateStripeCustomer,
+    getAccountSetUpLink,
+    addExternalAccount,
 }
