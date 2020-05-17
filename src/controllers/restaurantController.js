@@ -44,6 +44,13 @@ router.delete("/:id", async (req, res, next) => {
     return res.send(deleteResponse)
 })
 
+router.patch('/:id', async (req, res, next) => {
+    const update = req.body;
+    const [err, updateResponse] = await to(restaurantService.updateRestaurant(req.params.id, update))
+    if(err) return next(err)
+    return res.send(updateResponse)
+})
+
 
 
 module.exports = router
