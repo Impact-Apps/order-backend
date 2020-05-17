@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const locationSchema = require('./Location')
 const Schema = mongoose.Schema;
 
 const Restaurant = new Schema(
@@ -29,8 +30,8 @@ const Restaurant = new Schema(
             type: Number,
         },
         location: {
-            type: String,
-            lowercase: true,
+          type: locationSchema,
+          required: true
         },
         stripeAccountId: {
             type: String
