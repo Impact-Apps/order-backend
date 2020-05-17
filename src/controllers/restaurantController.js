@@ -18,7 +18,6 @@ router.get("/", async (req, res, next) => {
         console.log(longitude, latitude);
         [err, restaurants] = await to(restaurantService.getByLocation(longitude, latitude))
     } else{
-        console.log("No longitude or latitude");
         [err, restaurants] = await to(restaurantService.getAll())
     }
     if(err) return next(err)
