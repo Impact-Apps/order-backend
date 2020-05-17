@@ -1,12 +1,28 @@
 const express = require('express')
 const router = express.Router()
 const orderService = require('../services/orderService')
+const userService = require('../services/userService')
+const paymentsService = require('../services/paymentsService')
+const restaurantService = require('../services/restaurantService')
 const to = require('await-to-js').default
-const { isEmpty, has } = require('lodash')
+const { isEmpty, has, get } = require('lodash')
 const mongoose = require('mongoose');
 
 router.post("/", async (req, res, next) => {
     const body = req.body
+    const user = await userService.get(body.userId) // Some method to get a user from the database
+    const stripeCustomer = await paymentsService.findOrCreateStripeCustomer(user, body.tokenId)
+    if(!get(user, 'stripeCustomerId', null)) {
+        await userService.updateUser(body.userId, {stripeCustomerId: stripeCustomer.id})
+    }
+    const restaurants = await restaurantService.get({_id: body.restaurantId})
+    const { stripeAccountId } = restaurants[0]
+
+    // change amount and create it on the backend
+    const [ paymentErr, payment] = await to(paymentsService.createPayment({amount: body.amount,stripeAccountId, stripeCustomer}))
+    if(paymentErr) return next(paymentErr)
+    console.log(payment)
+
     const [err, order] = await to(orderService.create(body))
     if(err) return next(err)
     req.app.get('eventEmitter').emit('newOrderReceived', order.restaurantId)
