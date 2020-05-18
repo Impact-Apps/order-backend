@@ -5,7 +5,10 @@
     "cuisine": "South Indian",
     "image": "https://res.cloudinary.com/sivadass/image/upload/v1535181121/dummy-products/restaurants/adayar-anandha-bhavan.jpg",
     "rating": 4,
-    "location": "Velacherry"
+    "location": {
+      "longitude": -73.856077,
+      "latitude": 40.848447
+    }
   },
   {
     "name": "Anjappar",
@@ -13,7 +16,10 @@
     "cuisine": "South Indian",
     "image": "https://res.cloudinary.com/sivadass/image/upload/v1535181121/dummy-products/restaurants/anjappar.jpg",
     "rating": 3,
-    "location": "Okkiyampet"
+    "location": {
+      "longitude": -73.856077,
+      "latitude": 40.848447
+    }
   },
   {
     "name": "Buhari Hotel",
@@ -21,7 +27,10 @@
     "cuisine": "North Indian",
     "image": "https://res.cloudinary.com/sivadass/image/upload/v1535181119/dummy-products/restaurants/buhari.jpg",
     "rating": 4,
-    "location": "Karapakkam"
+    "location": {
+      "longitude": -73.856077,
+      "latitude": 40.848447
+    }
   },
   {
     "name": "Sree Gupta Bhavan",
@@ -29,7 +38,10 @@
     "cuisine": "North Indian",
     "image": "https://res.cloudinary.com/sivadass/image/upload/v1535181121/dummy-products/restaurants/gupta-bhavan.jpg",
     "rating": 5,
-    "location": "SRP Tools"
+    "location": {
+      "longitude": -73.856077,
+      "latitude": 40.848447
+    }
   },
   {
     "name": "Hot Chips",
@@ -37,7 +49,10 @@
     "cuisine": "South Indian",
     "image": "http://res.cloudinary.com/sivadass/image/upload/v1535181126/dummy-products/restaurants/hot-chips.jpg",
     "rating": 5,
-    "location": "Thiruvanmiyur"
+    "location": {
+      "longitude": -73.856077,
+      "latitude": 40.848447
+    }
   },
   {
     "name": "Paradise Briyani",
@@ -45,7 +60,10 @@
     "cuisine": "South Indian",
     "image": "https://res.cloudinary.com/sivadass/image/upload/v1535181121/dummy-products/restaurants/paradise.jpg",
     "rating": 4,
-    "location": "SRP Tools"
+    "location": {
+      "longitude": -73.856077,
+      "latitude": 40.848447
+    }
   },
   {
     "name": "Saravana Bhavan",
@@ -53,7 +71,10 @@
     "cuisine": "South Indian",
     "image": "https://res.cloudinary.com/sivadass/image/upload/v1535181121/dummy-products/restaurants/saravana-bhavan.jpg",
     "rating": 5,
-    "location": "Kandan Chavadi"
+    "location": {
+      "longitude": -73.856077,
+      "latitude": 40.848447
+    }
   },
   {
     "name": "Dindigul Thalappakatti",
@@ -61,7 +82,10 @@
     "cuisine": "South Indian",
     "image": "https://res.cloudinary.com/sivadass/image/upload/v1535181123/dummy-products/restaurants/thalapakatti.jpg",
     "rating": 3,
-    "location": "Karapakkam"
+    "location": {
+      "longitude": -73.856077,
+      "latitude": 40.848447
+    }
   },
   {
     "name": "Thambi Vilas",
@@ -69,7 +93,10 @@
     "cuisine": "South Indian",
     "image": "https://res.cloudinary.com/sivadass/image/upload/v1535181123/dummy-products/restaurants/thambi-vilas.jpg",
     "rating": 5,
-    "location": "Okkiyampet"
+    "location": {
+      "longitude": -73.856077,
+      "latitude": 40.848447
+    }
   },
   {
     "name": "Vasantha Bhavan",
@@ -77,6 +104,9 @@
     "cuisine": "South Indian",
     "image": "https://res.cloudinary.com/sivadass/image/upload/v1535181123/dummy-products/restaurants/vasantha-bhavan.jpg",
     "rating": 4,
-    "location": "Adyar"
+    "location": {
+      "longitude": -73.856077,
+      "latitude": 40.848447
+    }
   }
 ]
