@@ -23,24 +23,17 @@ const getOrCreate = async auth0Id => await RestaurantModel.collection.findOneAnd
     }
 );
 
-const getByLocation =  async (longitude, latitude) => await RestaurantModel.aggregate(
-  [
-    {
-      "$geoNear": {
-        "near": {
-          "type": "Point",
-          "coordinates": [longitude,latitude]
-        },
-        "distanceField": "distance",
-        "spherical": true,
-        "maxDistance": 1000000
-      }
+const getByLocation =  async (longitude, latitude) => await RestaurantModel.find({
+  location: {
+    $nearSphere: {
+      $geometry: {
+        type: 'Point',
+        coordinates: [longitude, latitude]
+      },
+      $maxDistance: 900 * 1609.34
     }
-],
-function(err,results) {
-
-}
-)
+  }
+})
 
 module.exports = {
     create,

@@ -31,6 +31,7 @@ const Restaurant = new Schema(
     },
     location: {
       type: locationSchema,
+      index: "2dsphere",
       required: true
     },
     stripeAccountId: {
