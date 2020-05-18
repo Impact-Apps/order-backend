@@ -39,7 +39,7 @@ app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 
 
-// app.use(jwtCheck);
+app.use(jwtCheck);
 
 // Define an endpoint that must be called with an access token
 app.get("/api/external", (req, res) => {
